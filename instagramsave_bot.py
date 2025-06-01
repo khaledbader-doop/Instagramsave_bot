@@ -32,21 +32,11 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("❌ الرابط غير صالح. الرجاء إرسال رابط من إنستقرام\n❌ Invalid link. Please send a valid Instagram post URL.")
         return
 
-    # Use igram.io or another public API (this is a placeholder simulation)
-    try:
-        api_url = f"https://igram.io/i/{user_input}"
-        headers = {'User-Agent': 'Mozilla/5.0'}
-        response = requests.get(api_url, headers=headers)
-
-        if response.ok:
-            # Simulate a successful return (actual implementation would parse HTML/JSON)
-            await update.message.reply_text("✅ تم استلام الرابط وجاري التحميل...\n✅ Link received. Downloading...")
-            # You can expand this part with real scraping logic or API calls
-        else:
-            await update.message.reply_text("❌ حدث خطأ أثناء الاتصال بالموقع\n❌ Error connecting to the download service.")
-
-    except Exception as e:
-        await update.message.reply_text(f"❌ حصل خطأ: {e}")
+    # بدل من محاولة الاتصال بـ igram.io، نرد برسالة مؤقتة
+try:
+    await update.message.reply_text("✅ تم استلام الرابط بنجاح، لكن ميزة التحميل غير مفعّلة حالياً.")
+except Exception as e:
+    await update.message.reply_text(f"❌ حصل خطأ:\n{e}")
 
 # Main function to start the bot
 def main():
