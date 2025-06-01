@@ -12,7 +12,8 @@ logging.basicConfig(
 )
 
 # Your bot token from BotFather
-BOT_TOKEN = "7203062916:AAFHvG7Vnxr8cbCwaShZsC-Sb8XVZmZvvX4"
+import os
+BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 # Function to check if the message contains an Instagram link
 def is_instagram_link(text):
