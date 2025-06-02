@@ -1,9 +1,9 @@
-
 import logging
 from telegram import Update
 from telegram.ext import ApplicationBuilder, CommandHandler, MessageHandler, ContextTypes, filters
 import requests
 import re
+import os
 
 # Enable logging
 logging.basicConfig(
@@ -12,7 +12,6 @@ logging.basicConfig(
 )
 
 # Your bot token from BotFather
-import os
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 # Function to check if the message contains an Instagram link
@@ -32,11 +31,11 @@ async def handle_message(update: Update, context: ContextTypes.DEFAULT_TYPE):
         await update.message.reply_text("❌ الرابط غير صالح. الرجاء إرسال رابط من إنستقرام\n❌ Invalid link. Please send a valid Instagram post URL.")
         return
 
-    # بدل من محاولة الاتصال بـ igram.io، نرد برسالة مؤقتة
-try:
-    await update.message.reply_text("✅ تم استلام الرابط بنجاح، لكن ميزة التحميل غير مفعّلة حالياً.")
-except Exception as e:
-    await update.message.reply_text(f"❌ حصل خطأ:\n{e}")
+    # رد مؤقت لأن ميزة التحميل غير مفعّلة حالياً
+    try:
+        await update.message.reply_text("✅ تم استلام الرابط بنجاح، لكن ميزة التحميل غير مفعّلة حالياً.")
+    except Exception as e:
+        await update.message.reply_text(f"❌ حصل خطأ:\n{e}")
 
 # Main function to start the bot
 def main():
